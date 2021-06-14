@@ -27,7 +27,7 @@
       "image": "alerougex/awsdemo_backend",
       "hostname": "backend",
       "links": [
-          "mysql-server"
+          "db"
       ],
       "environment": [
         {
@@ -47,9 +47,9 @@
       "memory": 250
     },
     {
-      "name": "mysql-server",
+      "name": "db",
       "image": "mysql:5.6",
-      "hostname": "mysql-server",
+      "hostname": "db",
       "environment": [
         {
           "name": "MYSQL_ROOT_PASSWORD",
