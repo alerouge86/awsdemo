@@ -5,10 +5,10 @@ jdk: openjdk11
 services:
   - docker
 
-# script:
-  # - cd backend
-  # - ./mvnw clean install -B
-  # - cd ..
+script:
+  - cd backend
+  - ./mvnw clean install -B -DskipTests
+  - cd ..
 
 after_success:
   # build backend image and push it to hub.docker
