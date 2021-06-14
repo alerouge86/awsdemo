@@ -1,0 +1,26 @@
+sudo: required
+language: java
+jdk: openjdk11
+
+services:
+  - docker
+
+script:
+  - ./mvnw clean install -B
+
+after_success:
+  - docker build -t alerougex/awsdemo .
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push alerougex/awsdemo
+
+# deploy:
+#   provider: elasticbeanstalk
+#   region: eu-central-1
+#   app: awsdemo
+#   env: awsdemo-env
+#   bucket_name: elasticbeanstalk-eu-central-1-398100061250
+#   bucket_path: awsdemo
+#   on:
+#     branch: master
+#   access_key_id: $AWS_ACCESS_KEY
+#   secret_access_key: $AWS_SECRET_KEY
