@@ -6,7 +6,8 @@ services:
   - docker
 
 script:
-  - backend/mvnw clean install -B - f backend
+  cd backend
+  - ./mvnw clean install -B - f backend
 
 after_success:
   # build backend image and push it to hub.docker
