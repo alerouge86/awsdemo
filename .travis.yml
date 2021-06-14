@@ -18,7 +18,7 @@ after_success:
   # build frontend image and push it to hub.docker
   - docker build -t alerougex/awsdemo_frontend frontend/
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push alerougex/_frontend
+  - docker push alerougex/awsdemo_frontend
   # build nginx image and push it to hub.docker
   - docker build -t alerougex/awsdemo_nginx nginx/
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
