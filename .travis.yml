@@ -10,7 +10,7 @@ script:
   - ./mvnw clean install -B -DskipTests
   - cd ..
 
-# deploy on AWS-ECS
+# deploy on AWS-ECS -
 deploy:
   provider: elasticbeanstalk
   region: eu-central-1
