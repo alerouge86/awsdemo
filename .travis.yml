@@ -7,7 +7,7 @@ services:
 
 script:
   - cd backend
-  - ./mvnw clean install -B - f .
+  - ./mvnw clean install -B
   - cd ..
 
 after_success:
