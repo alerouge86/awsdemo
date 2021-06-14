@@ -7,7 +7,7 @@ class Home extends Component {
   };
 
   async componentDidMount() {
-    const { data: books } = await axios.get("http://localhost:8081/books");
+    const { data: books } = await axios.get("/backend/books");
     this.setState({ books });
   }
 

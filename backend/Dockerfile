@@ -1,11 +1,16 @@
-FROM openjdk:8-jdk-alpine as builder
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} application.jar
-RUN java -Djarmode=layertools -jar application.jar extract
+#
+# Build stage
+#
+FROM maven:3.8.1-jdk-11 AS build
+COPY src /home/app/src
+COPY pom.xml /home/app
+# RUN mvn -f /home/app/pom.xml clean package -DskipTests
+RUN mvn -f /home/app/pom.xml clean package
 
-FROM openjdk:8-jdk-alpine
-COPY --from=builder dependencies/ ./
-COPY --from=builder snapshot-dependencies/ ./
-COPY --from=builder spring-boot-loader/ ./
-COPY --from=builder application/ ./
-ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
+#
+# Package stage
+#
+FROM openjdk:11-jre-slim
+COPY --from=build /home/app/target/awsdemo-1.0.jar /usr/local/lib/demo.jar
+EXPOSE 8181
+ENTRYPOINT ["java","-jar","/usr/local/lib/demo.jar"]

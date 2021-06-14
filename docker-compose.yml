@@ -17,8 +17,8 @@ services:
     depends_on: 
       - db
     build: ./backend
-    ports: 
-      - 8081:8081
+    # ports: 
+    #   - 8081:8081
     environment: 
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/db?autoReconnect=true&useSSL=false
       SPRING_DATASOURCE_USERNAME: "root"
@@ -28,8 +28,8 @@ services:
     depends_on: 
       - backend
     build: ./frontend
-    ports:
-        - 3000:3000
+    # ports:
+    #     - 3000:3000
     
   db:
     image: mysql:5.6
