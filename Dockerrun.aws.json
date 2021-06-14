@@ -1,0 +1,67 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "nginx",
+      "image": "alerougex/awsdemo_nginx",
+      "hostname": "nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["frontend", "backend"],
+      "memory": 100
+    },
+    {
+      "name": "frontend",
+      "image": "alerougex/awsdemo_frontend",
+      "hostname": "frontend",
+      "essential": false,
+      "memory": 300
+    },
+    {
+      "name": "backend",
+      "image": "alerougex/awsdemo_backend",
+      "hostname": "backend",
+      "links": [
+          "mysql-server"
+      ],
+      "environment": [
+        {
+          "name": "SPRING_DATASOURCE_URL",
+          "value": "jdbc:mysql://db:3306/db?autoReconnect=true&useSSL=false"
+        },
+        {
+          "name": "SPRING_DATASOURCE_USERNAME",
+          "value": "root"
+        },
+        {
+          "name": "SPRING_DATASOURCE_PASSWORD",
+          "value": "password"
+        }
+      ],
+      "essential": false,
+      "memory": 300
+    },
+    {
+      "name": "mysql-server",
+      "image": "mysql:5.6",
+      "hostname": "mysql-server",
+      "environment": [
+        {
+          "name": "MYSQL_ROOT_PASSWORD",
+          "value": "password"
+        },
+        {
+          "name": "MYSQL_DATABASE",
+          "value": "db"
+        }
+      ],
+      "essential": false,
+      "memory": 500
+    }
+  ]
+}
