@@ -10,24 +10,12 @@ script:
   - ./mvnw clean install -B -DskipTests
   - cd ..
 
-after_success:
-  # build images to push to docker hub
-  - docker build -t alerougex/awsdemo_backend backend/
-  - docker build -t alerougex/awsdemo_frontend frontend/
-  - docker build -t alerougex/awsdemo_nginx nginx/
-  # login
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  # push the images created to docker hub
-  - docker push alerougex/awsdemo_backend
-  - docker push alerougex/awsdemo_frontend
-  - docker push alerougex/awsdemo_nginx
-
-# deploy on AWS-ECS
+# deploy on AWS-ECS -
 deploy:
   provider: elasticbeanstalk
   region: eu-central-1
   app: awsdemo
-  env: Awsdemo-env-1
+  env: Awsdemo-env
   bucket_name: elasticbeanstalk-eu-central-1-398100061250
   bucket_path: awsdemo
   on:

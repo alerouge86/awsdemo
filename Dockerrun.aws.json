@@ -20,7 +20,7 @@
       "image": "alerougex/awsdemo_frontend",
       "hostname": "frontend",
       "essential": false,
-      "memory": 300
+      "memory": 250
     },
     {
       "name": "backend",
@@ -44,7 +44,7 @@
         }
       ],
       "essential": false,
-      "memory": 300
+      "memory": 250
     },
     {
       "name": "mysql-server",
@@ -61,7 +61,7 @@
         }
       ],
       "essential": false,
-      "memory": 500
+      "memory": 350
     }
   ]
 }
