@@ -6,13 +6,21 @@ services:
   - docker
 
 script:
-  - cd backend
-  - ./mvnw clean install -B
+  - ./mvnw clean install -B - f backend
 
 after_success:
-  - docker build -t alerougex/awsdemo .
+  # build backend image and push it to hub.docker
+  - docker build -t alerougex/awsdemo_backend backend/
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push alerougex/awsdemo
+  - docker push alerougex/awsdemoawsdemo_backend
+  # build frontend image and push it to hub.docker
+  - docker build -t alerougex/awsdemo_frontend frontend/
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push alerougex/awsdemoawsdemo_frontend
+  # build nginx image and push it to hub.docker
+  - docker build -t alerougex/awsdemo_nginx nginx/
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push alerougex/awsdemoawsdemo_nginx
 
 # deploy:
 #   provider: elasticbeanstalk
