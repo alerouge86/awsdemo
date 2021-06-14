@@ -11,29 +11,26 @@ script:
   - cd ..
 
 after_success:
-  # build backend image and push it to hub.docker
+  # build images to push to docker hub
   - docker build -t alerougex/awsdemo_backend backend/
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push alerougex/awsdemo_backend
-  # build frontend image and push it to hub.docker
   - docker build -t alerougex/awsdemo_frontend frontend/
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push alerougex/awsdemo_frontend
-  # build nginx image and push it to hub.docker
   - docker build -t alerougex/awsdemo_nginx nginx/
+  # login
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # push the images created to docker hub
+  - docker push alerougex/awsdemo_backend
+  - docker push alerougex/awsdemo_frontend
   - docker push alerougex/awsdemo_nginx
 
-
-
-# deploy:
-#   provider: elasticbeanstalk
-#   region: eu-central-1
-#   app: awsdemo
-#   env: awsdemo-env
-#   bucket_name: elasticbeanstalk-eu-central-1-398100061250
-#   bucket_path: awsdemo
-#   on:
-#     branch: master
-#   access_key_id: $AWS_ACCESS_KEY
-#   secret_access_key: $AWS_SECRET_KEY
+# deploy on AWS-ECS
+deploy:
+  provider: elasticbeanstalk
+  region: eu-central-1
+  app: awsdemo
+  env: awsdemo-env
+  bucket_name: elasticbeanstalk-eu-central-1-398100061250
+  bucket_path: awsdemo
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
