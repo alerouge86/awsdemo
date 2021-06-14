@@ -27,7 +27,7 @@ deploy:
   provider: elasticbeanstalk
   region: eu-central-1
   app: awsdemo
-  env: Awsdemo-env
+  env: Awsdemo-env-1
   bucket_name: elasticbeanstalk-eu-central-1-398100061250
   bucket_path: awsdemo
   on:
