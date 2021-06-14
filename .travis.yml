@@ -5,7 +5,7 @@ jdk: openjdk11
 services:
   - docker
 
-script:
+# script:
   # - cd backend
   # - ./mvnw clean install -B
   # - cd ..
