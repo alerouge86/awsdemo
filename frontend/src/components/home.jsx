@@ -14,7 +14,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <h1>All my books</h1>
+        <h1>All my books (2.1)</h1>
         <table className="table">
           <thead>
             <tr>
