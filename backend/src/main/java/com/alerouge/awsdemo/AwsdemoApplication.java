@@ -8,7 +8,7 @@ public class AwsdemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AwsdemoApplication.class, args);
-		System.out.println("spring boot application running 4");
+		System.out.println("spring boot application running 5");
 	}
 
 }
