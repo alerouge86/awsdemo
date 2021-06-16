@@ -11,6 +11,7 @@ class Home extends Component {
     try {
       console.log("test 1 - /backend/books");
       const { data: books } = await axios.get("/backend/books");
+      this.setState({ books });
     } catch (error) {
       console.log("error 2: ", error);
     }
@@ -19,6 +20,7 @@ class Home extends Component {
     try {
       console.log("test 2 - /localhost/books");
       const { data: books } = await axios.get("/localhost/books");
+      this.setState({ books });
     } catch (error) {
       console.log("error 2: ", error);
     }
@@ -27,6 +29,7 @@ class Home extends Component {
     try {
       console.log("test 3 - /localhost:8081/books");
       const { data: books } = await axios.get("/localhost:8081/books");
+      this.setState({ books });
     } catch (error) {
       console.log("error 3: ", error);
     }
@@ -35,11 +38,10 @@ class Home extends Component {
     try {
       console.log("test 4 - /localhost:5000/books");
       const { data: books } = await axios.get("/localhost:5000/books");
+      this.setState({ books });
     } catch (error) {
       console.log("error 4: ", error);
     }
-
-    this.setState({ books });
   }
 
   render() {
